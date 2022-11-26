@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HoopSortSolver", "HoopSortSolver.csproj", "{BD670D63-736C-49BB-805F-5D7D332E1951}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{B374037C-F020-433E-8AB4-21545A8E2B09}"
+	ProjectSection(SolutionItems) = preProject
+		..\game-213.txt = ..\game-213.txt
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD670D63-736C-49BB-805F-5D7D332E1951}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD670D63-736C-49BB-805F-5D7D332E1951}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD670D63-736C-49BB-805F-5D7D332E1951}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD670D63-736C-49BB-805F-5D7D332E1951}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {69596FA0-02E9-4CF8-8D3B-FD7DB69C8C1C}
+	EndGlobalSection
+EndGlobal
