@@ -1,0 +1,17 @@
+# Each pole on a separate line.
+# Each line is left to right bottom to top.
+# lines that are empty just say empty; comments start with #
+pink, light blue, blue, grey
+light green, teal, green, pink
+light blue, light green, green, purple
+pink, orange, red, light blue
+blue, yellow, brown, teal
+yellow, red, teal, brown
+grey, yellow, green, light green
+purple, pink, brown, orange
+red, green, grey, grey
+brown, yellow, orange, teal
+blue, purple, orange, light green
+blue, purple, red, light blue
+empty
+empty

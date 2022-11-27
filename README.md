@@ -31,7 +31,8 @@ there are a couple of shortcuts we can use to simplify things:
 # How to solve a hoop game
 
 The hoop logic puzzle is not especially complex, but it can sometimes require non-obvious moves, which can make it hard for a human player
-to find the solution.  Here's how to use this program to solve a hoop puzzle.
+to find the solution - especially if you are playing this game casually and not focusing intently on optimizing your play.  Here's how to 
+use this program to solve a hoop puzzle.
 
 First, you'll need to create a game file.  One sample file is included as [game-213.txt](game-213.txt).  The file should have one line for
 each pole, using comma separated text for each color.  You can use `#` symbols for comments, and the text `empty` by itself designates
