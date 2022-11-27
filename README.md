@@ -12,7 +12,8 @@ The rules of the game are:
 * You can move colored hoops onto an empty pole or onto their own color.
 * Whenever you move hoops, all hoops of the same color on top of the pole move with it.
 
-![Screenshot of the hoop sort game from my iPad](hoop-sort-screenshot.png | width=600)
+# Game data and randomness
+<img src="hoop-sort-screenshot.png" width="500">
 
 The level data for this game is most likely randomly generated.  I suspect that the logic of the hoop swapping puzzles is similar to the
 [Futurama Theorem](https://en.wiktionary.org/wiki/Futurama_theorem), which is a proof that any number of swaps can be undone by introducing
