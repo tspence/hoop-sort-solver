@@ -1,4 +1,5 @@
 ﻿using CommandLine;
+using System.Diagnostics;
 
 namespace HoopSortSolver
 {
@@ -25,13 +26,17 @@ namespace HoopSortSolver
                 Console.WriteLine($"Current score is {game.Score()}");
 
                 // Solve the puzzle
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
                 var steps = Solver(game);
+                sw.Stop();
                 if (steps.Count == 0)
                 {
                     Console.WriteLine("This game cannot be solved.");
                 }
                 else
                 {
+                    Console.WriteLine($"Solved in {sw.ElapsedMilliseconds}ms.");
                     Console.WriteLine($"It takes {steps.Count} moves to win the game:");
                     foreach (var step in steps)
                     {
@@ -45,6 +50,8 @@ namespace HoopSortSolver
         }
 
         /// <summary>
+        /// This is an implementation of A* that uses a priority queue and a distance function for game states.
+        /// 
         /// Potential improvements to the solver:
         ///  * Detect when one game state gets to the same position as another in fewer moves and reset its children
         ///  * Reduce the number of unnecessary allocations, maybe convert to structs
