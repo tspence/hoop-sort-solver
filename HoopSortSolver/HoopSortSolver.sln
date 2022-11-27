@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{B374037C-F020-433E-8AB4-21545A8E2B09}"
 	ProjectSection(SolutionItems) = preProject
 		..\game-173.txt = ..\game-173.txt
+		..\game-177.txt = ..\game-177.txt
 		..\game-213.txt = ..\game-213.txt
 		..\README.md = ..\README.md
 	EndProjectSection
