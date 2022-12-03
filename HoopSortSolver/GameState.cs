@@ -6,7 +6,6 @@ namespace HoopSortSolver {
 
     public class GameState {
         public int MaxPoleHeight { get; set; }
-        public List<PoleState> FinishedPoles { get; set; } = new List<PoleState>();
         public List<PoleState> Poles { get; set; } = new List<PoleState>();
         public PotentialMove? LastMove { get; set; } = null;
         public List<string> ColorNames { get; set; } = new();

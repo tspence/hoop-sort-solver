@@ -75,12 +75,7 @@ namespace HoopSortSolver
             foreach (var move in game.ListAvailableMoves())
             {
                 numberOfMovesConsidered++;
-                var serializedString = move.NewState.ToHashString();
-                if (!pastGameStates.Contains(serializedString))
-                {
-                    queue.Enqueue(move, move.Score);
-                    pastGameStates.Add(serializedString);
-                }
+                queue.Enqueue(move, move.Score);
             }
 
             // Go through the queue
@@ -94,31 +89,32 @@ namespace HoopSortSolver
                     lastScoreMessagePrinted += 1000;
                 }
 
-                // Examine all child moves
-                var newMoves = current.NewState.ListAvailableMoves();
-                foreach (var move in newMoves)
+                // Examine all child moves only if we haven't seen this state before
+                var serializedString = current.NewState.ToHashString();
+                if (!pastGameStates.Contains(serializedString))
                 {
-                    numberOfMovesConsidered++;
-                    if (move.NewState.IsWin())
+                    pastGameStates.Add(serializedString);
+                    var newMoves = current.NewState.ListAvailableMoves();
+                    foreach (var move in newMoves)
                     {
-                        Console.WriteLine($"Found a solution after examining {numberOfMovesConsidered} possible moves.");
-
-                        // Compute the list of moves to get to the win
-                        var movesToWin = new List<PotentialMove>();
-                        var thisMove = move;
-                        while (thisMove != null)
+                        numberOfMovesConsidered++;
+                        if (move.NewState.IsWin())
                         {
-                            movesToWin.Insert(0, thisMove);
-                            thisMove = thisMove.OldState.LastMove;
+                            Console.WriteLine($"Found a solution after examining {numberOfMovesConsidered} possible moves.");
+
+                            // Compute the list of moves to get to the win
+                            var movesToWin = new List<PotentialMove>();
+                            var thisMove = move;
+                            while (thisMove != null)
+                            {
+                                movesToWin.Insert(0, thisMove);
+                                thisMove = thisMove.OldState.LastMove;
+                            }
+                            return movesToWin;
                         }
-                        return movesToWin;
-                    } else
-                    {
-                        var serializedString = move.NewState.ToHashString();
-                        if (!pastGameStates.Contains(serializedString))
+                        else
                         {
                             queue.Enqueue(move, move.Score);
-                            pastGameStates.Add(serializedString);
                         }
                     }
                 }
