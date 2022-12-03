@@ -94,8 +94,10 @@ namespace HoopSortSolver {
             };
             NewState.Poles.AddRange(Poles);
             NewState.Poles[fromPole] = new PoleState();
+            NewState.Poles[fromPole].PoleNumber = this.Poles[fromPole].PoleNumber;
             NewState.Poles[fromPole].Hoops.AddRange(this.Poles[fromPole].Hoops);
             NewState.Poles[toPole] = new PoleState();
+            NewState.Poles[toPole].PoleNumber = this.Poles[toPole].PoleNumber;
             NewState.Poles[toPole].Hoops.AddRange(this.Poles[toPole].Hoops);
 
             // Transfer as many items between poles as possible
