@@ -6,8 +6,10 @@ namespace HoopSortSolver {
 
     public class GameState {
         public int MaxPoleHeight { get; set; }
+        public List<PoleState> FinishedPoles { get; set; } = new List<PoleState>();
         public List<PoleState> Poles { get; set; } = new List<PoleState>();
         public PotentialMove? LastMove { get; set; } = null;
+        public List<string> ColorNames { get; set; } = new();
         public int MovesTaken { get; set; } = 0;
         public bool IsWin() 
         {
@@ -31,7 +33,7 @@ namespace HoopSortSolver {
 
         public List<PotentialMove> ListAvailableMoves()
         {
-            var AvailableSpaces = new List<Tuple<int, string>>();
+            var AvailableSpaces = new List<Tuple<int, int>>();
             var Moves = new List<PotentialMove>();
 
             // Only need to keep track of one empty hoop at most
@@ -48,7 +50,7 @@ namespace HoopSortSolver {
                 {
                     var color = Poles[i].TopColor();
                     if (color != null) {
-                        AvailableSpaces.Add(new Tuple<int, string>(i, color));
+                        AvailableSpaces.Add(new Tuple<int, int>(i, color.Value));
                     }
                 }
             }
@@ -89,6 +91,7 @@ namespace HoopSortSolver {
                 Poles = new List<PoleState>(),
                 MaxPoleHeight = MaxPoleHeight,
                 MovesTaken = this.MovesTaken + 1,
+                ColorNames = this.ColorNames,
             };
             NewState.Poles.AddRange(Poles);
             NewState.Poles[fromPole] = new PoleState();
@@ -101,12 +104,12 @@ namespace HoopSortSolver {
             while (NewState.Poles[fromPole].TopColor() == color && NewState.Poles[toPole].Hoops.Count < MaxPoleHeight)
             {
                 NewState.Poles[fromPole].Hoops.RemoveAt(NewState.Poles[fromPole].Hoops.Count - 1);
-                NewState.Poles[toPole].Hoops.Add(color);
+                NewState.Poles[toPole].Hoops.Add(color.Value);
                 numHoopsMoved++;
             }
 
             // Construct the move for this change
-            var move = new PotentialMove(this, NewState, $"Move {numHoopsMoved} {color} from #{fromPole} to #{toPole}");
+            var move = new PotentialMove(this, NewState, $"Move {numHoopsMoved} {ColorName(color.Value)} from #{fromPole} to #{toPole}");
             NewState.LastMove = move;
             return move;
         }
@@ -134,7 +137,7 @@ namespace HoopSortSolver {
                         {
                             colors.Add(color);
                         }
-                        pole.Hoops.Add(color);
+                        pole.Hoops.Add(colors.IndexOf(color));
                     }
                     if (maxHeight == 0)
                     {
@@ -163,6 +166,7 @@ namespace HoopSortSolver {
             {
                 MaxPoleHeight = maxHeight,
                 Poles = list,
+                ColorNames = colors,
             };
         }
 
@@ -172,7 +176,21 @@ namespace HoopSortSolver {
             sb.AppendLine("Game: ");
             for (int i = 0; i < Poles.Count; i++)
             {
-                sb.AppendLine($"  Pole {i}: {Poles[i].ToGameString()}");
+                sb.Append($"  Pole {i}: ");
+                if (Poles[i].IsEmpty())
+                {
+                    sb.AppendLine("Empty");
+                }
+                else
+                {
+                    foreach (var hoop in Poles[i].Hoops)
+                    {
+                        sb.Append(ColorName(hoop));
+                        sb.Append(" > ");
+                    }
+                    sb.Length -= 3;
+                    sb.Append(Environment.NewLine);
+                }
             }
             return sb.ToString();
         }
@@ -183,7 +201,12 @@ namespace HoopSortSolver {
         /// <returns></returns>
         public string ToHashString()
         {
-            return String.Join(Environment.NewLine, (from pole in Poles select pole.ToGameString()).OrderBy(a => a));
+            return String.Join(Environment.NewLine, (from pole in Poles select pole.ToHashString()).OrderBy(a => a));
+        }
+
+        public string ColorName(int hoop)
+        {
+            return ColorNames[hoop];
         }
     }
 }

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "HoopSortSolver": {
+      "commandName": "Project",
+      "commandLineArgs": "--gamefile f:\\git\\hoop-sort-solver\\game-173.txt"
+    }
+  }
+}

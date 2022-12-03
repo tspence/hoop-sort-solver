@@ -4,7 +4,8 @@ using System.Text;
 namespace HoopSortSolver {
 
     public class PoleState {
-        public List<string> Hoops = new();
+        public int PoleNumber { get; set; }
+        public List<int> Hoops = new();
         public bool IsEmpty() 
         {
             return Hoops.Count == 0;
@@ -20,7 +21,7 @@ namespace HoopSortSolver {
             return !(from hoop in Hoops where hoop != color select hoop).Any();
         }
 
-        public string? TopColor() 
+        public int? TopColor() 
         {
             if (Hoops.Count > 0) {
                 return Hoops[Hoops.Count - 1];
@@ -28,7 +29,7 @@ namespace HoopSortSolver {
             return null;
         }
 
-        public string ToGameString()
+        public string ToHashString()
         {
             if (Hoops.Count == 0) return "Empty";
             return String.Join(" > ", Hoops);
