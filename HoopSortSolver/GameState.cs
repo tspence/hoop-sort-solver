@@ -1,8 +1,7 @@
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace HoopSortSolver {
+namespace HoopSortSolver
+{
 
     public class GameState {
         public int MaxPoleHeight { get; set; }

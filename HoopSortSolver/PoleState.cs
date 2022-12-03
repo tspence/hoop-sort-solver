@@ -1,7 +1,6 @@
-using System.Security.Cryptography;
-using System.Text;
 
-namespace HoopSortSolver {
+namespace HoopSortSolver
+{
 
     public class PoleState {
         public int PoleNumber { get; set; }
