@@ -92,24 +92,38 @@ namespace HoopSortSolver
                 ColorNames = this.ColorNames,
             };
             NewState.Poles.AddRange(Poles);
+
+            // How many colors can we move?
+            int numColorsThatCanMove = 1;
+            for (int i = Poles[fromPole].Hoops.Count - 2; i >= 0; i--)
+            {
+                if (Poles[fromPole].Hoops[i] == color)
+                {
+                    numColorsThatCanMove++;
+                }
+            }
+
+            // How many spaces are there?
+            int spacesAvailable = MaxPoleHeight - Poles[toPole].Hoops.Count();
+            int numActualMoves = Math.Min(numColorsThatCanMove, spacesAvailable);
+            int remainingHoops = Poles[fromPole].Hoops.Count - numActualMoves;
+
+            // Assemble new poles with the right heights
             NewState.Poles[fromPole] = new PoleState();
             NewState.Poles[fromPole].PoleNumber = this.Poles[fromPole].PoleNumber;
-            NewState.Poles[fromPole].Hoops.AddRange(this.Poles[fromPole].Hoops);
+            if (remainingHoops > 0) {
+                NewState.Poles[fromPole].Hoops.AddRange(this.Poles[fromPole].Hoops.GetRange(0, remainingHoops));
+            }
             NewState.Poles[toPole] = new PoleState();
             NewState.Poles[toPole].PoleNumber = this.Poles[toPole].PoleNumber;
             NewState.Poles[toPole].Hoops.AddRange(this.Poles[toPole].Hoops);
-
-            // Transfer as many items between poles as possible
-            int numHoopsMoved = 0;
-            while (NewState.Poles[fromPole].TopColor() == color && NewState.Poles[toPole].Hoops.Count < MaxPoleHeight)
+            for (int i = 0; i < numActualMoves; i++)
             {
-                NewState.Poles[fromPole].Hoops.RemoveAt(NewState.Poles[fromPole].Hoops.Count - 1);
                 NewState.Poles[toPole].Hoops.Add(color.Value);
-                numHoopsMoved++;
             }
 
             // Construct the move for this change
-            var move = new PotentialMove(this, NewState, $"Move {numHoopsMoved} {ColorName(color.Value)} from #{fromPole} to #{toPole}");
+            var move = new PotentialMove(this, NewState, $"Move {numActualMoves} {ColorName(color.Value)} from #{fromPole} to #{toPole}");
             NewState.LastMove = move;
             return move;
         }
