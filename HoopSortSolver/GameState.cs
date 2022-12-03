@@ -22,8 +22,13 @@ namespace HoopSortSolver
             foreach (var pole in Poles)
             {
                 var topColor = pole.TopColor();
-                foreach (var color in pole.Hoops) { 
-                    if (color != topColor) score += 5;
+                for (int i = pole.Hoops.Count - 2; i >= 0; i--)
+                {
+                    if (pole.Hoops[i] != topColor)
+                    {
+                        score += 5 * (i + 1);
+                        break;
+                    }
                 }
             }
             return score;
