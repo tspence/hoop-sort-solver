@@ -13,12 +13,13 @@ namespace HoopSortSolver {
 
         public bool IsFinished(GameState game)
         {
-            if (Hoops.Count == 0 || Hoops.Count != game.MaxPoleHeight)
+            if (Hoops.Count != game.MaxPoleHeight) return false;
+            var baseColor = Hoops[0];
+            for (int i = 1; i < game.MaxPoleHeight; i++)
             {
-                return false;
+                if (Hoops[i] != baseColor) return false;
             }
-            var color = Hoops[0];
-            return !(from hoop in Hoops where hoop != color select hoop).Any();
+            return true;
         }
 
         public int? TopColor() 
@@ -33,6 +34,13 @@ namespace HoopSortSolver {
         {
             if (Hoops.Count == 0) return "Empty";
             return String.Join(" > ", Hoops);
+        }
+
+        public bool CanMove(GameState game)
+        {
+            if (Hoops.Count == 0) return false;
+            if (IsFinished(game)) return false;
+            return true;
         }
     }
 }

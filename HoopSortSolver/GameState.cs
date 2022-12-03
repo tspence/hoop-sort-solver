@@ -57,7 +57,7 @@ namespace HoopSortSolver {
             // Figure out what we can move
             for (int i = 0; i < Poles.Count; i++)
             {
-                if (!Poles[i].IsEmpty())
+                if (Poles[i].CanMove(this))
                 {
                     var color = Poles[i].TopColor();
                     if (EmptyHoop > -1) { 
